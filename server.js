@@ -52,14 +52,8 @@ app.get('/authresponse', function(req, res) {
 	var authCode = url.parse(req.url,true).query.authCode;
 
 	// Present
-	res.render('authresponse',function(authCode) {
-		authCode: authCode
-	});
+	res.render('authresponse', {authCode: authCode});
 });
-
-
-// more routes for our API will happen here
-
 
 // START THE SERVER
 // =============================================================================
