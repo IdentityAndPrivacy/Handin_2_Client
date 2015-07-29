@@ -27,6 +27,8 @@ app.use(bodyParser.json());
 app.engine('handlebars', exphbs({defaultLayout: 'main'}));
 app.set('view engine', 'handlebars');
 
+app.use('/images', express.static(__dirname + "/images"));
+
 var port = process.env.PORT || 8080;        // set our port
 
 // Global variables
