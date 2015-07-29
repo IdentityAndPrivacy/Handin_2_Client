@@ -22,10 +22,6 @@ app.use(bodyParser.json());
 app.engine('handlebars', exphbs({defaultLayout: 'main'}));
 app.set('view engine', 'handlebars');
 
-app.get('/', function (req, res) {
-    res.render('home');
-});
-
 var port = process.env.PORT || 8080;        // set our port
 
 // ROUTES FOR OUR API
@@ -37,12 +33,19 @@ var router = express.Router();              // get an instance of the express Ro
 //     res.json({ message: 'hooray! welcome to our api!' });   
 // });
 
-router.get('/login', function(req, res) {
-	res.writeHead(301,
-	  {Location: authServerPath+'?clientId='+clientId}
+// Home path
+app.get('/', function (req, res) {
+    res.render('home');
+});
+
+// Redirection to Authentication server's login
+router.get('/login', function(req, res) {	
+	var url = authServerPath + '?clientId=' + clientId;	
+	res.writeHead(302,
+	  {Location: url}
 	);
 	res.end();
-})
+});
 
 
 // more routes for our API will happen here
