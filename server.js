@@ -67,10 +67,17 @@ app.get('/authresponse', function(req, res) {
 
 		});
 	  }
+	  else
+	  {
+	  	res.render('error', {
+	  		error: response.statusCode
+	  	});
+	  }
 	  
-	}).on('error', function(e) {
-	  console.log("Got error: " + e.message);
-	  res.render('authresponse');
+	}).on('error', function(e) {	  
+	  res.render('error', {
+	  		error: e.message
+	  	});
 	});
 });
 

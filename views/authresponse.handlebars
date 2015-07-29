@@ -1,2 +1,14 @@
-<h2>Auth response - not implemented yet</h2>
-<p>GOT TOKEN: {{token}}<p>
+<div>
+	<div class="container">
+
+		{{#if token}}
+		<p>You are now successfully logged in!</p>
+		<p>For your information, your token is {{token}}</p>
+		<a href='TODO-CONNECT-TO-RESOURCE-SERVER'><input class="btn" style="min-width: 330px;max-width:80%;" value="Get me some resources"></a>
+		{{/if}}
+
+		<div style="display:none">
+			Are you not entertained?!!
+		</div>
+	</div>
+</div>
