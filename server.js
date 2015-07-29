@@ -9,11 +9,13 @@ var exphbs     = require('express-handlebars');
 var app        = express();                 // define our app using express
 var bodyParser = require('body-parser');
 var url        = require('url');
+var http	   = require('http');
+var querystring =require('querystring');
 
 // Hardcoded stuff
 var clientId = 'A22d2fg224h98k8D7HH21';
 var authServer = 'http://pi-auth-server.herokuapp.com';
-var clientServer = 'http://pi-client-server.herokuapp.com';
+var clientServer = 'http://pi-client-server.herokuapp.com'; // debug: 'http://localhost:8080';
 var redirectUrl = clientServer + '/authresponse';
 
 // configure app to use bodyParser()
@@ -27,11 +29,8 @@ app.set('view engine', 'handlebars');
 
 var port = process.env.PORT || 8080;        // set our port
 
-
-// test route to make sure everything is working (accessed at GET http://localhost:8080/api)
-// router.get('/', function(req, res) {
-//     res.json({ message: 'hooray! welcome to our api!' });   
-// });
+// Global variables
+var token = "";
 
 // Home path
 app.get('/', function (req, res) {
@@ -50,9 +49,27 @@ app.get('/login', function(req, res) {
 app.get('/authresponse', function(req, res) {
 	// Request token from Authorization server
 	var authCode = url.parse(req.url,true).query.authCode;
+	var reqUrl = authServer + '/request-token?authCode='+authCode;
+	console.log(reqUrl);
+	
+	http.get(reqUrl, function(response) {
+	  console.log("Got response: " + response.statusCode);
+	  if(response.statusCode === 200){
+	  	response.on('data',function(chunk) {
+	  		console.log('response' + chunk);
+		  	token = JSON.parse(chunk).token;
+		  	console.log(token);
+		  	res.render('authresponse', {
+		  		token: token
+		  	});		
 
-	// Present
-	res.render('authresponse', {authCode: authCode});
+		});
+	  }
+	  
+	}).on('error', function(e) {
+	  console.log("Got error: " + e.message);
+	  res.render('authresponse');
+	});
 });
 
 // START THE SERVER
