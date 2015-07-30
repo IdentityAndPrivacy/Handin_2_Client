@@ -23,5 +23,25 @@
 
   
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/js/materialize.min.js"></script>
+
+  <script type="text/javascript">
+window.addEventListener("message", receiveMessage, false);
+
+function receiveMessage(event)
+{
+  debugger;
+  if (event.origin !== "http://example.org:8080")
+    return;
+
+  // ...
+}
+
 </body>
+
+
+
+</script>
+
 </html>
+
+
