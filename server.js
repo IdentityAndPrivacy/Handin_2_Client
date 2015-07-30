@@ -74,7 +74,7 @@ app.get('/authresponse', function(req, res) {
 			  				console.log(chunk);
 			  				var user = JSON.parse(chunk).user;
 			  				console.log('User' + user);
-			  				getFriends(token, user, res);			  				
+			  				getFriends(token, user, res);
 			  			});
 			  		}
 			  	});
@@ -110,7 +110,7 @@ function getFriends(token, user, res) {
   	// 	}
   	// };
 
-  	https.get(resourceServer+'/users?accessToken='+token, function(resourceRes) {
+  	https.get('https://pi-resource-server.herokuapp.com/users?accessToken='+token, function(resourceRes) {
   		console.log('ANSWER!');  		
   		var data = '';
   		resourceRes.on('data', function (chunk) {
