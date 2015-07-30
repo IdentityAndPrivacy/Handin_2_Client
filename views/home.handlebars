@@ -19,3 +19,18 @@
 	</a>  
 </div>
 
+
+
+<script type="text/javascript">
+window.addEventListener("message", receiveMessage, false);
+
+function receiveMessage(event)
+{
+	debugger;
+  if (event.origin !== "http://example.org:8080")
+    return;
+
+  // ...
+}
+
+</script>
