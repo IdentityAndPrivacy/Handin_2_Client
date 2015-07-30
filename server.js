@@ -10,6 +10,7 @@ var app        = express();                 // define our app using express
 var bodyParser = require('body-parser');
 var url        = require('url');
 var http	   = require('http');
+var https	   = require('https');
 var querystring =require('querystring');
 
 // Hardcoded stuff
@@ -54,7 +55,7 @@ app.get('/authresponse', function(req, res) {
 	var reqUrl = authServer + '/request-token?authCode='+authCode;
 	console.log(reqUrl);
 	
-	http.get(reqUrl, function(response) {
+	https.get(reqUrl, function(response) {
 	  console.log("Got response: " + response.statusCode);
 	  if(response.statusCode === 200){
 	  	response.on('data',function(chunk) {
