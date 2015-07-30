@@ -133,10 +133,15 @@ function getFriends(token, user, res) {
 	  			}
 	  			else{
 	  				res.render('error', {
-						error: '(resource) ' + resourceRes.statusCode
+						error: '(resource)'
 					});
 	  			}
-			}      		
+			}
+			else{
+  				res.render('error', {
+					error: '(resource) ' + resourceRes.statusCode
+				});
+  			}      		
 	    });
   	});
 
