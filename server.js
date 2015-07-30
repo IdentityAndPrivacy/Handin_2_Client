@@ -118,24 +118,26 @@ function getFriends(token, user, res) {
 	        data += chunk;
       	});
       	resourceRes.on('end', function(){
-	        console.log('DATA!!!:' + data);
-	        if(data && (JSON.parse(data).message !== 'Access denied!')){
-  				// Render page
-  				console.log('Data exists!');
-		      	var jsonObject = JSON.parse(data);		      	
-		      	// Show view
-			    res.render('authresponse', {
-			  		token: token,
-			  		name: user.firstname + ' ' + user.lastname,
-			  		users: jsonObject.data.users
-			  	});
-  			}
-  			else{
-  				res.render('error', {
-					error: '(resource) ' + resourceRes.statusCode
-				});
-  			}
-	    })
+			if (resourceRes.statusCode === 200) {
+				console.log('DATA!!!:' + data);
+		        if(data && (JSON.parse(data).message !== 'Access denied!')){
+	  				// Render page
+	  				console.log('Data exists!');
+			      	var jsonObject = JSON.parse(data);		      	
+			      	// Show view
+				    res.render('authresponse', {
+				  		token: token,
+				  		name: user.firstname + ' ' + user.lastname,
+				  		users: jsonObject.data.users
+				  	});
+	  			}
+	  			else{
+	  				res.render('error', {
+						error: '(resource) ' + resourceRes.statusCode
+					});
+	  			}
+			}      		
+	    });
   	});
 
     // post_req.write(post_data);
