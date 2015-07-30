@@ -152,5 +152,8 @@ function getFriends(token, user, res) {
 
 // START THE SERVER
 // =============================================================================
+app.get('*',function(req,res){  
+    res.redirect('https://pi-client-server.herokuapp.com'+req.url);
+});
 app.listen(port);
 console.log('Magic happens on port ' + port);
