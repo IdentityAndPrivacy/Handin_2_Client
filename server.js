@@ -119,7 +119,7 @@ function getFriends(token, user, res) {
       	});
       	resourceRes.on('end', function(){
 	        console.log('DATA!!!:' + data);
-	        if(data){
+	        if(data && (JSON.parse(data).message !== 'Access denied!')){
   				// Render page
   				console.log('Data exists!');
 		      	var jsonObject = JSON.parse(data);		      	
