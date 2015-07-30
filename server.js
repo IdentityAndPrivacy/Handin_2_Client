@@ -14,8 +14,8 @@ var querystring =require('querystring');
 
 // Hardcoded stuff
 var clientId = 'A22d2fg224h98k8D7HH21';
-var authServer = 'http://pi-auth-server.herokuapp.com';
-var clientServer = 'http://pi-client-server.herokuapp.com'; // debug: 'http://localhost:8080';
+var authServer = 'https://pi-auth-server.herokuapp.com';
+var clientServer = 'https://pi-client-server.herokuapp.com'; // debug: 'http://localhost:8080';
 var redirectUrl = clientServer + '/authresponse';
 
 // configure app to use bodyParser()
