@@ -10,12 +10,13 @@ var app        = express();                 // define our app using express
 var bodyParser = require('body-parser');
 var url        = require('url');
 var http	   = require('http');
+var https	   = require('https');
 var querystring =require('querystring');
 
 // Hardcoded stuff
 var clientId = 'A22d2fg224h98k8D7HH21';
-var authServer = 'http://pi-auth-server.herokuapp.com';
-var clientServer = 'http://pi-client-server.herokuapp.com'; // debug: 'http://localhost:8080';
+var authServer = 'https://pi-auth-server.herokuapp.com';
+var clientServer = 'https://pi-client-server.herokuapp.com'; // debug: 'http://localhost:8080';
 var redirectUrl = clientServer + '/authresponse';
 
 // configure app to use bodyParser()
@@ -54,7 +55,7 @@ app.get('/authresponse', function(req, res) {
 	var reqUrl = authServer + '/request-token?authCode='+authCode;
 	console.log(reqUrl);
 	
-	http.get(reqUrl, function(response) {
+	https.get(reqUrl, function(response) {
 	  console.log("Got response: " + response.statusCode);
 	  if(response.statusCode === 200){
 	  	response.on('data',function(chunk) {
