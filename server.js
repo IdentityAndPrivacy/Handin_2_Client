@@ -16,7 +16,7 @@ var querystring =require('querystring');
 // Hardcoded stuff
 var clientId = 'A22d2fg224h98k8D7HH21';
 var authServer = 'https://pi-auth-server.herokuapp.com';
-var clientServer = 'http://localhost:8080'; // 'https://pi-client-server.herokuapp.com'; // debug: 
+var clientServer = 'https://pi-client-server.herokuapp.com'; // debug: 'http://localhost:8080'; //
 var resourceServer = 'https://pi-resource-server.herokuapp.com';
 var redirectUrl = clientServer + '/authresponse';
 
@@ -38,6 +38,9 @@ var token = "";
 
 // Home path
 app.get('/', function (req, res) {
+	// Waking up the other servers (they are free :) )
+	https.get(authServer, function(response){});
+	https.get(resourceServer, function(response){});
 	res.render('home');
 });
 
@@ -71,14 +74,10 @@ app.get('/authresponse', function(req, res) {
 			  				console.log(chunk);
 			  				var user = JSON.parse(chunk).user;
 			  				console.log('User' + user);
-
-
-			  				getFriends(token, user, res);
-			  				
+			  				getFriends(token, user, res);			  				
 			  			});
 			  		}
 			  	});
-
 		  });
 		}
 		else
@@ -123,8 +122,7 @@ function getFriends(token, user, res) {
 	        if(data){
   				// Render page
   				console.log('Data exists!');
-		      	var jsonObject = JSON.parse(data);
-		      	//console.log('jsonObject' + jsonObject);
+		      	var jsonObject = JSON.parse(data);		      	
 		      	// Show view
 			    res.render('authresponse', {
 			  		token: token,
