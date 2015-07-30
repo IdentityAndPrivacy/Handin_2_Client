@@ -118,7 +118,7 @@ function getFriends(token, user, res) {
 	        data += chunk;
       	});
       	resourceRes.on('end', function(){
-	        console.log(data);
+	        console.log('DATA!!!:' + data);
 	        if(data){
   				// Render page
   				console.log('Data exists!');
