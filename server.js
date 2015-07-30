@@ -102,7 +102,7 @@ function getFriends(token, user, res) {
 
   	var post_options = {
   		host: 'pi-resource-server.herokuapp.com',
-  		path: '/api/token',
+  		path: '/users',
   		method: 'POST',
   		headers: {
   			'Content-Type': 'application/x-www-form-urlencoded',
