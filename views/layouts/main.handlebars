@@ -30,10 +30,10 @@ window.addEventListener("message", receiveMessage, false);
 function receiveMessage(event)
 {
   debugger;
-  if (event.origin !== "http://example.org:8080")
+  if (event.origin !== "http://pi-auth-server.herokuapp.com" || event.origin !== "https://pi-auth-server.herokuapp.com")
     return;
 
-  // ...
+  window.location.href = event.data;
 }
 </script>
 
