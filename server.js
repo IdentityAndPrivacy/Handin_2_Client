@@ -152,8 +152,13 @@ function getFriends(token, user, res) {
 
 // START THE SERVER
 // =============================================================================
-app.get('*',function(req,res){  
-    res.redirect('https://pi-client-server.herokuapp.com'+req.url);
-});
+/* At the top, with other redirect methods before other routes */
+app.get('*',function(req,res,next){
+  if(req.headers['x-forwarded-proto']!='https')
+    res.redirect(clientServer+req.url);
+  else
+    next() /* Continue to other routes if we're not redirecting */
+})
+
 app.listen(port);
 console.log('Magic happens on port ' + port);
