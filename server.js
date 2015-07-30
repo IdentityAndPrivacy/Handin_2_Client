@@ -95,22 +95,22 @@ app.get('/authresponse', function(req, res) {
 });
 
 function getFriends(token, user, res) {
-	var post_data = querystring.stringify({
-      'accessToken': token
-  	});
-  	console.log('Data: ' + post_data);
+	// var post_data = querystring.stringify({
+ //      'accessToken': token
+ //  	});
+ //  	console.log('Data: ' + post_data);
 
-  	var post_options = {
-  		host: 'pi-resource-server.herokuapp.com',
-  		path: '/users',
-  		method: 'POST',
-  		headers: {
-  			'Content-Type': 'application/x-www-form-urlencoded',
-  			'Content-Length': post_data.length
-  		}
-  	};
+  	// var post_options = {
+  	// 	host: 'pi-resource-server.herokuapp.com',
+  	// 	path: '/users',
+  	// 	method: 'POST',
+  	// 	headers: {
+  	// 		'Content-Type': 'application/x-www-form-urlencoded',
+  	// 		'Content-Length': post_data.length
+  	// 	}
+  	// };
 
-  	var post_req = https.request(post_options, function(resourceRes) {
+  	https.get(resourceServer+'/users?accessToken='+token, function(resourceRes) {
   		console.log('ANSWER!');  		
   		var data = '';
   		resourceRes.on('data', function (chunk) {
@@ -138,8 +138,8 @@ function getFriends(token, user, res) {
 	    })
   	});
 
-    post_req.write(post_data);
-    post_req.end();
+    // post_req.write(post_data);
+    // post_req.end();
 
 };
 
